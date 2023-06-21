@@ -6,6 +6,7 @@ export const imageSlider = [
     "https://images.unsplash.com/photo-1523380744952-b7e00e6e2ffa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGNhcHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
 ];
 
+
 export const categoryList = [
     {
         id: 1,

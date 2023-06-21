@@ -51,10 +51,10 @@ const DrawerNav = () => {
 const MainNavigator = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Drawer">
+            <Stack.Navigator initialRouteName="AddProductScreen">
                 <Stack.Screen
-                    name="Drawer"
-                    component={DrawerNav}
+                    name="AddProductScreen"
+                    component={AddProductScreen}
                     options={{
                         headerShown: false
                     }}

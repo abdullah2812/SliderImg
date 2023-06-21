@@ -68,7 +68,7 @@ return(
         data={categoryList}
         key={3}
         numColumns={3}
-        keyExtractor={categoryList.keyExtractor}
+        keyExtractor={categoryList.id}
         contentContainerStyle={styles.flatListContainer}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
