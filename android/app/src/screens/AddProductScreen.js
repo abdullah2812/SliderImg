@@ -8,30 +8,30 @@ import ImagePicker from 'react-native-image-crop-picker';
 import { InputComponent } from '../components/inputComponent';
 
 const styles = StyleSheet.create({
-mainContainer: {
+  mainContainer: {
     flex: 1,
     backgroundColor: 'white'
   },
-scroll: {
+  scroll: {
     margin: 8,
     paddingBottom: 8
   },
-imageContainer: {
+  imageContainer: {
     alignItems: 'center',
     marginVertical: 8
   },
-imageButton: {
+  imageButton: {
     width: 200,
     height: 200,
     borderWidth: 0.5,
     justifyContent: 'center',
     alignItems: 'center'
   },
-horizontalContainer: {
+  horizontalContainer: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-},
-sellerText: {
+  },
+  sellerText: {
     fontSize: 18,
     fontWeight: 'bold',
     marginTop: 16,
@@ -39,12 +39,12 @@ sellerText: {
     marginBottom: 0,
     color: 'black'
   },
-buttonContainer: {
+  buttonContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 8
   },
-saveButton: {
+  saveButton: {
     marginTop: 16,
     borderWidth: 1,
     borderRadius: 5,
@@ -52,8 +52,8 @@ saveButton: {
     paddingHorizontal: 16,
     backgroundColor: 'mistyrose'
   },
-saveText: {
-  color: 'black'
+  saveText: {
+    color: 'black'
   }
 });
 
@@ -72,7 +72,7 @@ const [productData, setProductData] = useState({
   price: null,
   instagram: '',
   facebook: '',
-  phoneNumber : ''
+  phoneNumber: ''
 });
 
 const addImage = () => {
@@ -93,14 +93,14 @@ const addImage = () => {
 
 const onInputChange = (type, value) => {
   setProductData({
-      ...productData,
-      [type]: value
-  }); 
+    ...productData,
+    [type]: value
+  });
 };
 
 useEffect(() => {
   console.log(productData);
-  }, [productData]);
+}, [productData]);
 
 return (
   <View style={styles.mainContainer}>
@@ -128,64 +128,64 @@ return (
         </TouchableOpacity>
       </View>
       <View style={styles.horizontalContainer}>
-       <InputComponent
-        placeholder='Product Name'
-        value={productData.productName}
-        onChangeText={(text) =>
-             onInputChange('productName', text)}
-       />
-</View>
-<View style={styles.horizontalContainer}>
-    <InputComponent
-        placeholder='Description'
-        value={productData.description}
-        onChangeText={(text) =>
-             onInputChange('description', text)}
-        isDescription={true}
-    />
-    <InputComponent
-        placeholder="Price"
-        value={productData.price}
-        onChangeText={(text) =>
-            onInputChange('price', text)}
-        isIcon={true}
-        name="dollar"
-        type="font-awesome"
+        <InputComponent
+          placeholder='Product Name'
+          value={productData.productName}
+          onChangeText={(text) =>
+            onInputChange('productName', text)}
         />
-</View>
-<Text style={styles.sellerText}>Seller Contact</Text>
-    <InputComponent
-      placeholder='Whastapp number (ex : +4498739230)'
-      value={productData.phoneNumber}
-      onChangeText={(text) => onInputChange('phoneNumber', text)}
-      isIcon={true}
-      name="whatsapp"
-      type="font-awesome"
+      </View>
+      <View style={styles.horizontalContainer}>
+        <InputComponent
+          placeholder='Description'
+          value={productData.description}
+          onChangeText={(text) =>
+            onInputChange('description', text)}
+          isDescription={true}
+        />
+        <InputComponent
+          placeholder="Price"
+          value={productData.price}
+          onChangeText={(text) =>
+            onInputChange('price', text)}
+          isIcon={true}
+          name="dollar"
+          type="font-awesome"
+        />
+      </View>
+      <Text style={styles.sellerText}>Seller Contact</Text>
+      <InputComponent
+        placeholder='Whastapp number (ex : +4498739230)'
+        value={productData.phoneNumber}
+        onChangeText={(text) => onInputChange('phoneNumber', text)}
+        isIcon={true}
+        name="whatsapp"
+        type="font-awesome"
       />
-    <InputComponent
-      placeholder='Instagram username (ex : timedooracademy)'
-      value={productData.instagram}
-      onChangeText={(text) => onInputChange('instagram', text)}
-      isIcon={true}
-      name="instagram"
-      type="font-awesome"
-    />
+      <InputComponent
+        placeholder='Instagram username (ex : timedooracademy)'
+        value={productData.instagram}
+        onChangeText={(text) => onInputChange('instagram', text)}
+        isIcon={true}
+        name="instagram"
+        type="font-awesome"
+      />
 
-    <InputComponent
-      placeholder='Facebook username (ex : timedooracademy)'
-      value={productData.facebook}
-      onChangeText={(text) => onInputChange('facebook', text)}
-      isIcon={true}
-      name = "facebook-square"
-      type = "font-awesome"
-    />
-    <View style={styles.buttonContainer}>
-      <TouchableOpacity
-        style={styles.saveButton}
-      >
-        <Text style={styles.saveText}>SAVE</Text>
-      </TouchableOpacity>
-      </View> 
+      <InputComponent
+        placeholder='Facebook username (ex : timedooracademy)'
+        value={productData.facebook}
+        onChangeText={(text) => onInputChange('facebook', text)}
+        isIcon={true}
+        name="facebook-square"
+        type="font-awesome"
+      />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.saveButton}
+        >
+          <Text style={styles.saveText}>SAVE</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   </View>
 );
