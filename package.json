@@ -17,6 +17,7 @@
     "react-native-elements": "^3.4.3",
     "react-native-image-crop-picker": "^0.40.0",
     "react-native-image-slider-box": "^2.0.7",
+    "react-native-select-dropdown": "^3.3.4",
     "react-native-vector-icons": "^9.2.0"
   },
   "devDependencies": {
