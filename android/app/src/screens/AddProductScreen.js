@@ -119,7 +119,7 @@ const onInputChange = (type, value) => {
   });
 };
 
-const saveData = () => {
+const saveData = (newData) => {
   if (productData.productName === '' || productData.imagePath === '' || productData.description === '' || productData.price === '' || productData.category === null) {
     alert('Please fill all your product information!');
   }
@@ -131,7 +131,8 @@ const saveData = () => {
     const lastId =
     allData.length === 0 ? 0:
     allData[allData.length - 1].id;
-    realm.write(() => {
+    if (newData !== '') {
+      realm.write(() => {
         realm.create('Product', {
                 id: lastId + 1,
                 productName: productData.productName,
@@ -143,7 +144,11 @@ const saveData = () => {
                 facebook: productData.facebook,
                 phoneNumber: productData.phoneNumber
         }); 
-      }); 
+      });
+      alert('Successfully save your data!');
+    }else{
+      alert('Empty note!');
+    } 
     };
 };
 
@@ -232,7 +237,6 @@ return (
         name="instagram"
         type="font-awesome"
       />
-
       <InputComponent
         placeholder="Facebook username (ex : timedooracademy)"
         value={productData.facebook}
