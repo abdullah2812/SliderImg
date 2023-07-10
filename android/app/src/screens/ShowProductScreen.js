@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import {categoryList} from '../data/Data';
 import {MediaComponent} from '../components/MediaComponent';
+import { Linking } from 'react-native';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -85,7 +86,9 @@ const [isBuy, setIsBuy] = useState(false);
 const [contact, setContact] = useState({
   phoneNumber: '',
   instagram: '',
+  facebook: ''
 });
+
 const buyProduct = (whatsapp, instagramId, facebookId) => {
   setContact({
     phoneNumber: whatsapp,
@@ -99,6 +102,20 @@ const collectData = () => {
   const allData = realm.objects('Product').filtered('category = ${id}'); //object => untuk mengakses database Product
   setData(allData);
 };
+
+
+const onClickMedia = (type) => {
+  if (type === 'whatsapp') {
+    Linking.openURL('https://wa.me/${contact.numberPhone}')
+  }else if (type === 'instagram'){
+    Linking.openURL('https://www.instagram.com/${contact.instagram}')
+  }else if (type == 'facebook'){
+    Linking.openURL('https://m.me/${contact.facebook}')
+  }
+};
+
+const {navigation} = props;
+
 
 useEffect(() => {
   const productPage = navigation.addListener('focus', () => {});
@@ -115,7 +132,9 @@ useEffect(() => {
       return (
         <TouchableOpacity style={styles.itemButton}>
           <View style={styles.productContainer}>
-            <Image style={styles.image} source={{uri: item.imagePath}} />
+            <TouchableOpacity onPress={()=> navigation.navigate('ImageZoom',{imagePath:item.imagePath})}>
+              <Image style={styles.image} source={{uri: item.imagePath}} />
+            </TouchableOpacity>     
             <View style={styles.textContainer}>
               <Text style={styles.title}>{item.productName}</Text>
               <Text style={styles.text}>{item.description}</Text>
@@ -144,17 +163,20 @@ useEffect(() => {
            <MediaComponent
                source={require('../../assets/images/whatsapp.png')}
                value={contact.phoneNumber}
+               onPress={() => onClickMedia('whatsapp')}
            />
            :
            contact.facebook !== '' ?
            <MediaComponent
                source={require('../../assets/images/facebook.png')}
                value={contact.facebook}
+               onPress={() => onClickMedia('facebook')}
            /> :
            contact.instagram !== '' ?
            <MediaComponent
                source={require('../../assets/images/instagram.png')}
                value={contact.instagram}
+               onPress={() => onClickMedia('instagram')}
            />
           :
           null

@@ -28,12 +28,9 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   imageButton: {
-    width: 200,
-    height: 200,
-    borderWidth: 0.5,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+    width: wp('50%'),
+    height: wp('50%'),
+},
   horizontalContainer: {
     flexDirection: 'row',
     alignItems: 'flex-end',
@@ -63,14 +60,14 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   selectDropdown: {
-    borderRadius: 10,
-    backgroundColor: 'skyblue',
-    width: 150,
-    height: 30,
-    marginLeft: 8
+    width: wp('40%'),
+    height: hp('4%'),
+},
+sellerText: {
+  fontSize:hp('2.5%'),
 },
 selectText: {
-    fontSize: 12
+  fontSize: hp('1.5%'),
 }
 });
 
