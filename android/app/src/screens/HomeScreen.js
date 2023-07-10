@@ -5,6 +5,10 @@ import {imageSlider} from '../../data/Data';
 import {SliderBox} from 'react-native-image-slider-box';
 import {Image, FlatList, TouchableOpacity} from 'react-native';
 import {categoryList} from '../../data/Data';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen-hooks';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -16,7 +20,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: 18,
+    fontSize: hp('2.5%'),
     fontWeight: 'bold',
     color: 'black',
   },
@@ -29,13 +33,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#7CAF58',
     borderRadius: 10,
-    height: 130,
+    height: hp('17%'),
     justifyContent: 'center',
     alignItems: 'center',
   },
   icon: {
-    width: 100,
-    height: 100,
+    width: wp('20%'),
+    height: hp('12%'),
     resizeMode: 'contain',
   },
   itemName: {
@@ -54,7 +58,7 @@ return (
       images={imageSlider}
       autoplay={true}
       circleLoop={true}
-      sliderBoxHeight={250}
+      sliderBoxHeight={hp('30%')}
     />
     <View style={styles.titleContainer}>
       <Text style={styles.text}>Categories</Text>
