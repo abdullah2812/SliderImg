@@ -43,12 +43,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const HomeScreen = () => {
-  return (
-    <View>
-      <Text>HomeScreen</Text>
-    </View>
-  );
+const HomeScreen = (props) => {
+  const {navigation} = props;
+  
 };
 
 return (
@@ -73,6 +70,8 @@ return (
             <TouchableOpacity style={styles.button}>
               <Image source={{uri: categoryList.icon}} style={styles.icon} />
               <Text style={styles.itemName}>{categoryList.name}</Text>
+              onPress={() => navigation.
+              navigate('ShowProduct', { categoryId: item.id })}
             </TouchableOpacity>
           );
         }}
