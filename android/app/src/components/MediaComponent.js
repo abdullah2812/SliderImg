@@ -24,5 +24,5 @@ const styles = StyleSheet.create({
   image: {
     width: wp('25%'),
     height: wp('25%'),
-  },
+  }
 });
