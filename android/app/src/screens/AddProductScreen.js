@@ -13,6 +13,10 @@ import {InputComponent} from '../components/inputComponent';
 import SelectDropdown from 'react-native-select-dropdown';
 import {categoryList} from '../data/Data';
 import realm from '../../store/realm';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen-hooks';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -159,7 +163,9 @@ return (
       <View style={styles.imageContainer}>
         <TouchableOpacity style={styles.imageButton} onPress={() => addImage()}>
           <Image
-            style={{width: 50, height: 50}}
+            style={{width: productData.imagePath !=='' ? wp('50%') : 50, 
+              height: productData.imagePath !=='' ? wp('50%') : 50
+            }}
             source={{
               uri: 'https://assets.webiconspng.com/uploads/2017/02/Photograph-Icon-PNG.png',
             }}
