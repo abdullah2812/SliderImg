@@ -18,13 +18,113 @@ import {
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen-hooks';
 
-const EditProductScreen = () => {
-  return (
-    <View>
-      <Text>EditProductScreen</Text>
-    </View>
-  )
+const EditProductScreen = (props) => {
+  const {route} = props;
+  const idProduct = route
 }
+
+useEffect(()=>{
+    const data = realm.object('Product').filtered('id=${id}')[0];
+    setProductData({
+        productName: data.productName ,
+        imagePath: data.imagePath,
+        category: data.category ,
+        description: data.description,
+        price: String(data.price), //untuk mengubah dari int ke string
+        instagram: data.instagram,
+        facebook: data.facebook,
+        phoneNumber: data.phoneNumber
+    });
+}, [idProduct]);
+
+const styles = StyleSheet.create({
+    mainContainer: {
+      flex: 1,
+      backgroundColor: 'white',
+    },
+    scroll: {
+      margin: 8,
+      paddingBottom: 8,
+    },
+    imageContainer: {
+      alignItems: 'center',
+      marginVertical: 8,
+    },
+    imageButton: {
+      width: wp('50%'),
+      height: wp('50%'),
+  },
+    horizontalContainer: {
+      flexDirection: 'row',
+      alignItems: 'flex-end',
+    },
+    sellerText: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      marginTop: 16,
+      marginLeft: 8,
+      marginBottom: 0,
+      color: 'black',
+    },
+    buttonContainer: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginBottom: 8,
+    },
+    saveButton: {
+      marginTop: 16,
+      borderWidth: 1,
+      borderRadius: 5,
+      paddingVertical: 8,
+      paddingHorizontal: 16,
+      backgroundColor: 'mistyrose',
+    },
+    saveText: {
+      color: 'black',
+    },
+    selectDropdown: {
+      width: wp('40%'),
+      height: hp('4%'),
+  },
+  sellerText: {
+    fontSize:hp('2.5%'),
+  },
+  selectText: {
+    fontSize: hp('1.5%'),
+  }
+  });
+
+const [productData, setProductData] = useState({
+    productName: '',
+    imagePath: '',
+    category: null,
+    description: '',
+    price: null,
+    instagram: '',
+    facebook: '',
+    phoneNumber: '',
+  });
+
+const onInputChange = (type, value) => {
+    ({ //pr
+        ...productData,
+        [type]: value
+    });
+};
+
+const addImage = ()=>{
+    ImagePicker.openPicker({
+        width: 2000,
+        height: 2000,
+        cropping: true
+    }).then(image => {
+        console.log(image)
+setProductData({...productData, imagePath : image.path 
+        });
+    }).catch(errorMessage => {
+        console.log(errorMessage);
+    }); 
+}; 
 
 return (
     <View style={styles.mainContainer}>
@@ -60,6 +160,7 @@ return (
             onChangeText={text => onInputChange('productName', text)}
           />
           <SelectDropdown
+            defaultValueByIndex={productData.category - 1}
             data={categoryList}
             defaultButtonText="Select category" //default place holder
             onSelect={(item) => {
@@ -73,7 +174,6 @@ return (
             }}
             buttonStyle={styles.selectDropdown}
             buttonTextStyle={styles.selectText}
-            ref={dropdownRef}
           />
         </View>
         <View style={styles.horizontalContainer}>
@@ -125,5 +225,6 @@ return (
       </ScrollView>
     </View>
   );
+     
 
 export default EditProductScreen

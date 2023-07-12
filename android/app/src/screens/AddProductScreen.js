@@ -82,6 +82,7 @@ const AddProductScreen = () => {
     </View>
   );
 };
+
 const [productData, setProductData] = useState({
   productName: '',
   imagePath: '',

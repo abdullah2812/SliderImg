@@ -134,7 +134,12 @@ useEffect(() => {
     keyExtractor={item => item.id}
     renderItem={({item}) => {
       return (
-        <TouchableOpacity style={styles.itemButton}>
+        <TouchableOpacity 
+        style={styles.itemButton}
+        onPress={()=>navigation.navigate('EditProduct',{ //diambil dari main navigator yang telah kita daftarkan
+          idProduct:item.id
+        })}
+        >
           <View style={styles.productContainer}>
             <TouchableOpacity onPress={()=> navigation.navigate('ImageZoom',{imagePath:item.imagePath})}>
               <Image style={styles.image} source={{uri: item.imagePath}} />
