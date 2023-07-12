@@ -13,6 +13,10 @@ import {
 import {categoryList} from '../data/Data';
 import {MediaComponent} from '../components/MediaComponent';
 import { Linking } from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen-hooks';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -37,8 +41,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   image: {
-    width: 100,
-    height: 100,
+    width: wp('25%'),
+    height:  hp('25%'),
   },
   textContainer: {
     flex: 1,
@@ -47,12 +51,12 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'black',
-    fontSize: 18,
+    fontSize: hp('2,5%'),
     fontWeight: 'bold',
   },
   text: {
     color: 'black',
-    fontSize: 16,
+    fontSize: hp('2%'),
   },
   modalContainer: {
     backgroundColor: 'rgba(255,255,255,0.9)',

@@ -18,11 +18,11 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    fontSize: 18,
+    fontSize: hp('2,5%'),
     marginLeft: 8,
   },
   image: {
-    width: 30,
-    height: 30,
+    width: wp('25%'),
+    height: wp('25%'),
   },
 });
