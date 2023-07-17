@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View, Text, Alert} from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
 import {
   View,
@@ -17,10 +17,12 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen-hooks';
+import { Alert } from 'react-native';
 
 const EditProductScreen = (props) => {
   const {route} = props;
   const idProduct = route
+  const {navigation} = props;
 }
 
 useEffect(()=>{
@@ -126,6 +128,41 @@ setProductData({...productData, imagePath : image.path
     }); 
 }; 
 
+const saveData = (newData) => {
+  if (productData.productName === '' || productData.imagePath === '' || productData.description === '' || productData.price === '' || productData.category === null) {
+    alert('Please fill all your product information!');
+  }
+  else if (productData.phoneNumber === '' && productData.instagram === '' && productData.facebook === '') {
+    alert('Please fill at least one seller contact!');
+  } else {
+   const updateData = realm.object('Product').filtered('id = ${id}')[0];
+   if (updateData.phoneNumber === '' && updateData.imagePath === '' && updateData.category === '' && updateData.description === '' && updateData.price === '' && updateData.instagram === '' && updateData.facebook === ''){
+    Alert.alert(
+      'Nothing to update!'
+    )
+   }else{
+    realm.write(()=>{
+      updateData.productName = updateData.productName;
+      updateData.imagePath = updateData.imagePath;
+      updateData.category = updateData.category;
+      updateData.description = updateData.description;
+      updateData.price = parseInt(updateData.price);
+      updateData.instagram = updateData.instagram;
+      updateData.facebook = updateData.facebook;
+      updateData.phoneNumber = updateData.phoneNumber;
+     });
+     Alert.alert(
+      "Success",
+      "Successfully update your information!",
+      [{
+        text:"Ok", onPress:()=>navigation.goBack()
+      }]
+     );
+   }
+   
+    };
+};
+
 return (
     <View style={styles.mainContainer}>
       <ScrollView contentContainerStyle={styles.scroll}>
@@ -190,6 +227,7 @@ return (
             isIcon={true}
             name="dollar"
             type="font-awesome"
+            keyboardType="numeric"
           />
         </View>
         <Text style={styles.sellerText}>Seller Contact</Text>
@@ -200,6 +238,7 @@ return (
           isIcon={true}
           name="whatsapp"
           type="font-awesome"
+          keyboardType="numeric"
         />
         <InputComponent
           placeholder="Instagram username (ex : timedooracademy)"
@@ -219,7 +258,7 @@ return (
         />
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.saveButton}>
-            <Text style={styles.saveText}>SAVE</Text>
+            <Text style={styles.saveText}>EDIT</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -227,4 +266,4 @@ return (
   );
      
 
-export default EditProductScreen
+export default EditProductScreen;
