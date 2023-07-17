@@ -8,6 +8,7 @@ import AddProductScreen from '../screens/AddProductScreen';
 import ShowProductScreen from '../screens/ShowProductScreen';
 import ImageZoomScreen from '../screens/ImageZoomScreen';
 import EditProductScreen from '../screens/EditProductScreen';
+import SplashScreen from '../screens/SplashScreen';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -85,6 +86,13 @@ const MainNavigator = () => {
         },
 }} 
 />
+        <Stack.Screen
+          name="Splash"
+          component={SplashScreen}
+          options={{
+            headerShown:false
+          }}
+        />  
       </Stack.Navigator>
     </NavigationContainer>
   );

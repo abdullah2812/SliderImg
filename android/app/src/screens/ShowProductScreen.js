@@ -18,6 +18,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen-hooks';
 import {UserState} from 'realm';
+import { ButtonComponent } from '../components/ButtonComponent';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -89,6 +90,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    height: hp('7%'),
+},
 });
 
 const [isRemove, setIsRemove] = UserState(false);
@@ -149,6 +154,36 @@ const setCheckBox = (id, status) => {
   setData(newData)
 };
 
+const onCancel = () =>{
+  const newData = data.map((item)=>{
+    item.checkedStatus = false
+  })
+  setData(newData)
+  setIsRemove(false)
+};
+
+const onDelete = () => {
+  const checkedTrue = [];
+  data.forEach((item) => {
+      if (item.checkedStatus) {
+          checkedTrue.push(item.id)
+      }
+  }); 
+  if (checkedTrue.length != 0) { //length => menghitung jumlah anggota array
+      realm.write(() => {
+          for (i = 0; i < checkedTrue.length; i++) { //i kurang dari anggora checkedtrue
+              const removeData = realm.objects('Product').filtered('id = ${checkedTrue[i]}');
+              realm.delete(removeData);
+          }
+    }); 
+      alert('Successfully remove the products!');
+      setIsRemove(false);
+      collectData();
+} else {
+      alert('Nothing to remove!');
+  }
+};
+
 useEffect(() => {
   const productPage = navigation.addListener('focus', () => {});
   collectData();
@@ -184,9 +219,10 @@ useEffect(() => {
               <Text style={styles.text}>$ {item.price}</Text>
             </View>
           </View>
-          <TouchableOpacity>
-            onPress=
-            {() => buyProduct(item.phoneNumber, item.instagram, item.facebook)}
+          <TouchableOpacity
+           onPress=
+           {() => buyProduct(item.phoneNumber, item.instagram, item.facebook)}
+          >
             <Icon name="shoppingcart" type="antdesign" size={30} />
           </TouchableOpacity>
         </TouchableOpacity>
@@ -224,6 +260,23 @@ useEffect(() => {
       </View>
     </View>
   ) : null}
+
+  {
+    isRemove ?
+    <View style={styles.buttonContainer}>
+      <ButtonComponent
+        backgroundColor="red"
+        title="Delete"
+        onPress={() => onDelete()}
+      />
+      <ButtonComponent
+        backgroundColor="green"
+        title="Cancel"
+        onPress={() => onCancel()}
+      />
+    </View>
+      :null
+  }
 
   {isRemove ? (
     <CheckBox size={30} containerStyle={styles.checkBox} 
